@@ -1,0 +1,64 @@
+<!--导航栏  -->
+<form report-submit bindsubmit='toTopHandler'>
+  <button form-type='submit'>
+    <view class='navigator' style='padding-top:{{STATUSBAR_HEIGHT}}px;background-color:rgba(3, 169, 244, {{opacity}});'>
+      <!--左边按钮  -->
+      <view class='leftButton' hover-class='hover-class' bindtap='gotoSetting'>
+        <image src='/assets/setting.svg'></image>
+      </view>
+      <!--中间标题  -->
+      <view class='title'>
+        <text>一句话的事</text>
+      </view>
+      <!--右边间隙  -->
+    </view>
+  </button>
+</form>
+
+<!--加载中  -->
+<view class='loading-container' wx:if="{{LOADING}}">
+  <text class='loading-title'>一句话的事</text>
+</view>
+
+<scroll-view
+  scroll-y
+  bindscroll="scrollHandler"
+  scroll-with-animation
+  class="container"
+  scroll-top="{{SCROLL_TOP}}"
+  wx:else>
+  <!--顶部图片  -->
+  <image src='{{img_url}}' class='header_image'></image>
+  <!--顶部文字  -->
+  <view class='header_text'>
+    <text>{{header_text}}</text>
+  </view>
+  <!--卡片内容  -->
+  <view class="card">
+  <view class='first_card' hover-class='hover-class'
+   wx:for="{{data}}"
+     wx:key="{{index}}"
+  >
+    <form report-submit bindsubmit='addPushHandler' data-item='{{item}}' >
+      <button  form-type='submit'>
+          <!--vol标题  -->
+          <view class='first_title_box'>
+            <text>Log/{{item.title}}</text>
+          </view>
+          <!--内容  -->
+          <view class='first_content_box'>
+            <text decode="{{true}}">&nbsp;&nbsp;{{item.content}}</text>
+          </view>
+          <!--作者  -->
+          <view class='first_author_box'>
+            <text>- {{item.textAuthors}}</text>
+          </view>
+      </button>
+    </form>
+  </view>
+  </view>
+  <!--底部内容  -->
+  <navigator url='/pages/settin/openSource' class='footer' hover-class='hover-class'>
+    <text>HYH</text>
+  </navigator>
+</scroll-view>
